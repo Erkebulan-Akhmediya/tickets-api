@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { WeightClass } from '../weight-class/weight-class.entity';
 
 @Entity({ name: 'fighter' })
 export class Fighter {
@@ -25,4 +26,27 @@ export class Fighter {
 
   @Column({ name: 'nickname' })
   nickname: string;
+
+  @ManyToOne(() => WeightClass, { nullable: false })
+  weightClass: WeightClass;
+
+  constructor(
+    name: string,
+    team: string,
+    nationality: string,
+    birthDate: Date,
+    birthPlace: string,
+    weight: number,
+    nickname: string,
+    weightClass: WeightClass,
+  ) {
+    this.name = name;
+    this.team = team;
+    this.nationality = nationality;
+    this.birthDate = birthDate;
+    this.birthPlace = birthPlace;
+    this.weight = weight;
+    this.nickname = nickname;
+    this.weightClass = weightClass;
+  }
 }
